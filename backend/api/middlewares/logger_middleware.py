@@ -23,15 +23,15 @@ class LoggerMiddleware(BaseHTTPMiddleware):
         start_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         starttime = time.perf_counter()
 
-        Method = request.method
-        Path = request.url.path
-        Query_params = dict(request.query_params)
+        method = request.method
+        path = request.url.path
+        query_params = dict(request.query_params)
 
         logger.info(
             f"""Incoming request:
-            Method: {Method},
-            Path: {Path},
-            Query Params: {Query_params},
+            Method: {method},
+            Path: {path},
+            Query Params: {query_params},
             Time: {start_time}"""
         )
 
@@ -41,9 +41,9 @@ class LoggerMiddleware(BaseHTTPMiddleware):
             duration = time.perf_counter() - starttime
             logger.info(
                 f"""Outgoing response:,
-                Method: {Method},
-                Path: {Path},
-                Query Params: {Query_params},
+                Method: {method},
+                Path: {path},
+                Query Params: {query_params},
                 Duration: {duration:.4f} seconds"""
             )
         return response
